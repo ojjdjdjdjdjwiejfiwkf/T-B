@@ -1,0 +1,3729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, Togepi 🌸</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@400;600;700&family=Allura&family=Poppins:wght@300;400;500;600&family=Nunito:wght@300;400;600;700&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+<style>
+/* ============================
+   ROOT & GLOBAL
+============================ */
+:root {
+  --pink: #f9c6d0;
+  --deep-pink: #e8899a;
+  --cream: #fff8f0;
+  --baby-blue: #c5dff8;
+  --lavender: #d9b8f5;
+  --peach: #fdd9b5;
+  --rose: #f4a0b0;
+  --beige: #f5ede4;
+  --rose-gold: #c8836e;
+  --light-purple: #c3a8e8;
+  --soft-gold: #e8c96e;
+  --text-dark: #5a3a4a;
+  --text-mid: #8a6070;
+  --text-light: #b8909a;
+  --white: #ffffff;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; overflow-x: hidden; }
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background:
+radial-gradient(circle at 20% 20%, rgba(255,215,225,.35) 0%, transparent 25%),
+radial-gradient(circle at 80% 30%, rgba(255,240,190,.25) 0%, transparent 30%),
+radial-gradient(circle at 30% 80%, rgba(220,235,255,.25) 0%, transparent 28%),
+linear-gradient(135deg,#fffaf8 0%,#fff5f8 35%,#fffdfb 100%);
+  color: var(--text-dark);
+  overflow-x: hidden;
+  cursor: none;
+
+  background-attachment: fixed;
+position: relative;
+}
+body::before{
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:-1;
+    opacity:.06;
+
+    background-image:
+    radial-gradient(circle, rgba(0,0,0,.08) 1px, transparent 1px);
+
+    background-size:22px 22px;
+}
+
+
+/* Custom cursor */
+#cursor {
+  position: fixed;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--deep-pink);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease;
+  mix-blend-mode: multiply;
+}
+#cursor-trail {
+  position: fixed;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--rose);
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: left 0.15s ease, top 0.15s ease;
+  opacity: 0.5;
+}
+
+/* Cursor particles */
+.cursor-particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9997;
+  font-size: 10px;
+  animation: particleFade 0.8s ease-out forwards;
+}
+@keyframes particleFade {
+  0% { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%,-120%) scale(0.3); }
+}
+
+/* ============================
+   LOADING SCREEN
+============================ */
+#loading {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #ffe8f0 0%, #f8e8ff 50%, #e8f4ff 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  overflow: hidden;
+}
+
+.loading-egg {
+  font-size: 80px;
+  animation: eggBounce 1.5s ease-in-out infinite;
+  filter: drop-shadow(0 10px 20px rgba(200,131,110,0.3));
+  cursor: pointer;
+  user-select: none;
+}
+#egg-click-count { display: none; }
+
+@keyframes eggBounce {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+.loading-text {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.8rem;
+  color: var(--rose-gold);
+  margin-top: 24px;
+  opacity: 0;
+  animation: loadTextFade 1s ease 0.5s forwards;
+}
+@keyframes loadTextFade {
+  to { opacity: 1; }
+}
+
+.loading-dots::after {
+  content: '';
+  animation: dots 1.5s infinite;
+}
+@keyframes dots {
+  0% { content: '.'; }
+  33% { content: '..'; }
+  66% { content: '...'; }
+}
+
+.loading-hearts {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+}
+.loading-heart {
+  font-size: 1.2rem;
+  animation: heartPulse 1.2s ease infinite;
+}
+.loading-heart:nth-child(2) { animation-delay: 0.2s; }
+.loading-heart:nth-child(3) { animation-delay: 0.4s; }
+@keyframes heartPulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.4); opacity: 1; }
+}
+
+.loading-blossom {
+  position: absolute;
+  font-size: 1.2rem;
+  animation: blossomFall linear infinite;
+  opacity: 0;
+}
+@keyframes blossomFall {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.7; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+.loading-progress {
+  width: 200px;
+  height: 3px;
+  background: rgba(200,131,110,0.2);
+  border-radius: 10px;
+  margin-top: 30px;
+  overflow: hidden;
+}
+.loading-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--rose), var(--light-purple));
+  border-radius: 10px;
+  animation: loadProgress 2.5s ease forwards;
+}
+@keyframes loadProgress {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+/* Secret message */
+.secret-msg {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 24px 36px;
+  border-radius: 20px;
+  border: 2px solid var(--pink);
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5rem;
+  color: var(--rose-gold);
+  box-shadow: 0 10px 40px rgba(200,131,110,0.3);
+  z-index: 10002;
+  display: none;
+  text-align: center;
+}
+
+/* ============================
+   FLOATING ELEMENTS (GLOBAL)
+============================ */
+.ambient-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+.ambient-el {
+  position: absolute;
+  animation: ambientFloat linear infinite;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}
+@keyframes ambientFloat {
+  0% { transform: translateY(110vh) rotate(0deg) scale(0.8); opacity: 0; }
+  5% { opacity: 0.6; }
+  95% { opacity: 0.6; }
+  100% { transform: translateY(-10vh) rotate(360deg) scale(1); opacity: 0; }
+}
+
+/* ============================
+   NAV
+============================ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  padding: 16px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  background: rgba(255,248,240,0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(232,137,154,0.2);
+}
+.nav-logo {
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.8rem;
+  color: var(--deep-pink);
+  letter-spacing: 1px;
+}
+.nav-links {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-mid);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+.nav-links a:hover {
+  background: var(--pink);
+  color: var(--rose-gold);
+}
+
+/* ============================
+   CHAPTER HEADERS
+============================ */
+.chapter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.8);
+  border: 1px solid var(--pink);
+  border-radius: 30px;
+  padding: 8px 20px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--rose-gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+
+
+/* ===========================
+   BIRTHDAY BANNER
+=========================== */
+
+.birthday-banner{
+display:inline-flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding:18px 28px;
+margin-bottom:16px;
+border-radius:30px;
+background:linear-gradient(
+135deg,
+rgba(255,236,244,.95),
+rgba(255,250,230,.95),
+rgba(236,245,255,.95)
+);
+border:2px solid rgba(255,190,215,.5);
+box-shadow:
+0 12px 35px rgba(255,180,210,.30),
+0 4px 12px rgba(255,255,255,.8) inset;
+backdrop-filter:blur(8px);
+animation:bannerFloat 4s ease-in-out infinite;
+text-align:center;
+max-width:700px;
+margin-left:auto;
+margin-right:auto;
+}
+
+@keyframes bannerFloat{
+0%,100%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(-8px);
+}
+}
+
+
+/* ============================
+   CHAPTER T — TREASURE (HERO)
+============================ */
+#chapter-t {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 170px 20px 40px;
+  background: linear-gradient(160deg, #fff0f5 0%, #fef6ff 40%, #f0f7ff 100%);
+}
+
+.hero-scene{
+    position:relative;
+    margin:8px 0;
+}
+.hero-cake{
+
+    position:relative;
+    z-index:10;
+
+    display:block;
+    margin:8px auto;
+
+    font-size:135px;
+
+    cursor:pointer;
+    user-select:none;
+
+    animation:
+        cakeFloat 3s ease-in-out infinite,
+        cakeGlowPulse 3s ease-in-out infinite;
+
+    filter:
+        drop-shadow(0 12px 20px rgba(255,170,190,.60))
+        drop-shadow(0 0 35px rgba(255,220,120,.55))
+        drop-shadow(0 0 70px rgba(255,220,150,.40))
+        drop-shadow(0 0 110px rgba(255,245,180,.25));
+
+}
+
+/* Magical Aura */
+
+.hero-cake::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:185px;
+    height:185px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(circle,
+        rgba(255,255,210,.95) 0%,
+        rgba(255,230,150,.60) 38%,
+        rgba(255,200,170,.30) 62%,
+        transparent 80%);
+
+    filter:blur(25px);
+
+    animation:cakeAura 3s ease-in-out infinite;
+
+    z-index:-1;
+
+}
+
+/* Golden Light Under Cake */
+
+.hero-cake::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    bottom:-15px;
+
+    transform:translateX(-50%);
+
+    width:220px;
+    height:70px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(circle,
+        rgba(255,225,120,.85),
+        transparent 72%);
+
+    filter:blur(20px);
+
+    z-index:-2;
+
+}
+
+/* Floating */
+
+@keyframes cakeFloat{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-15px);
+
+}
+
+}
+
+/* Glow Pulse */
+
+@keyframes cakeGlowPulse{
+
+0%,100%{
+
+filter:
+drop-shadow(0 12px 20px rgba(255,170,190,.60))
+drop-shadow(0 0 35px rgba(255,220,120,.50))
+drop-shadow(0 0 70px rgba(255,220,150,.35))
+drop-shadow(0 0 100px rgba(255,245,180,.20));
+
+}
+
+50%{
+
+filter:
+drop-shadow(0 15px 28px rgba(255,170,190,.75))
+drop-shadow(0 0 50px rgba(255,225,130,.80))
+drop-shadow(0 0 90px rgba(255,225,150,.55))
+drop-shadow(0 0 140px rgba(255,245,180,.35));
+
+}
+
+}
+
+/* Aura Animation */
+
+@keyframes cakeAura{
+
+0%,100%{
+
+transform:
+translate(-50%,-50%)
+scale(.92);
+
+opacity:.65;
+
+}
+
+50%{
+
+transform:
+translate(-50%,-50%)
+scale(1.18);
+
+opacity:1;
+
+}
+
+}
+
+/* After candles are blown */
+
+.cake-candles-blown{
+
+filter:
+grayscale(.2)
+brightness(.92);
+
+}
+.balloon-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 8px;
+}
+.balloon {
+  font-size: 2.5rem;
+  animation: balloonFloat 3s ease-in-out infinite;
+  display: inline-block;
+}
+.balloon:nth-child(2) { animation-delay: 0.4s; }
+.balloon:nth-child(3) { animation-delay: 0.8s; }
+@keyframes balloonFloat {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-15px) rotate(5deg); }
+}
+
+.hero-title{
+    font-family:'Great Vibes',cursive;
+    font-size:clamp(4rem,8vw,6.5rem);
+    color:var(--rose-gold);
+    line-height:1;
+    margin:10px 0 12px;
+    margin-bottom:6px;
+    text-shadow:0 8px 25px rgba(200,131,110,.28);
+}
+.hero-subtitle{
+    font-family:'Quicksand', sans-serif;
+    font-size:clamp(1rem,2vw,1.2rem);
+    color:var(--text-mid);
+    font-weight:500;
+    max-width:700px;
+    line-height:1.8;
+    margin:12px auto 20px;
+}
+.hero-tagline{
+    font-family:'Dancing Script',cursive;
+    font-size:1.6rem;
+    color:var(--light-purple);
+    margin-bottom:22px;
+}
+.tiny-quotes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.tiny-q {
+  background: rgba(255,255,255,0.9);
+  border: 1px solid var(--pink);
+  border-radius: 20px;
+  padding: 8px 18px;
+  font-size: 0.82rem;
+  color: var(--text-mid);
+  font-style: italic;
+  backdrop-filter: blur(5px);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--deep-pink), var(--light-purple));
+  color: white;
+  padding: 16px 36px;
+  border-radius: 50px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 30px rgba(200,131,110,0.4);
+  letter-spacing: 0.5px;
+}
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 14px 40px rgba(200,131,110,0.5);
+}
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  color: var(--rose-gold);
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: 2px solid var(--pink);
+  cursor: none;
+  transition: all 0.3s ease;
+}
+.btn-secondary:hover {
+  background: var(--pink);
+  transform: translateY(-2px);
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.6;
+  animation: scrollBounce 2s ease infinite;
+}
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+.scroll-indicator span {
+  font-size: 0.7rem;
+  color: var(--text-light);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.scroll-arrow {
+  font-size: 1.2rem;
+  color: var(--deep-pink);
+}
+
+/* Floating sparkles in hero */
+.hero-sparkle {
+  position: absolute;
+  pointer-events: none;
+  animation: sparkleAnim ease-in-out infinite;
+  user-select: none;
+}
+@keyframes sparkleAnim {
+  0%, 100% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.2) rotate(20deg); }
+}
+
+/* ============================
+   SECTION SHARED
+============================ */
+section {
+  position: relative;
+  overflow: hidden;
+}
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 100px 24px;
+}
+.section-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  color: var(--rose-gold);
+  text-align: center;
+  margin-bottom: 12px;
+}
+.section-subtitle {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  color: var(--text-mid);
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto 60px;
+  line-height: 1.8;
+}
+
+/* Dividers */
+.petal-divider {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 40px 0;
+  opacity: 0.6;
+}
+
+/* Handwritten notes */
+.handwritten-note {
+  background: rgba(255,255,255,0.95);
+  border-left: 3px solid var(--deep-pink);
+  border-radius: 12px;
+  padding: 20px 28px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.3rem;
+  color: var(--text-mid);
+  margin: 40px auto;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(200,131,110,0.12);
+  position: relative;
+}
+.handwritten-note::before {
+  content: '"';
+  font-size: 3rem;
+  color: var(--pink);
+  position: absolute;
+  top: -5px;
+  left: 12px;
+  line-height: 1;
+}
+
+/* ============================
+   CHAPTER O — ONE OF A KIND
+============================ */
+#chapter-o {
+  background: linear-gradient(160deg, #fff6f9 0%, #f8f0ff 60%, #fff8f0 100%);
+}
+
+.trait-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.trait-card {
+  background: white;
+  border-radius: 20px;
+  padding: 28px;
+  border: 1px solid rgba(232,137,154,0.2);
+  box-shadow: 0 4px 24px rgba(200,131,110,0.08);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
+.trait-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--deep-pink), var(--light-purple));
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+  transform-origin: left;
+}
+.trait-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(200,131,110,0.18);
+}
+.trait-card:hover::before { transform: scaleX(1); }
+
+.trait-icon {
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+  display: block;
+}
+.trait-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--rose-gold);
+  margin-bottom: 10px;
+}
+.trait-desc {
+  font-size: 0.88rem;
+  color: var(--text-mid);
+  line-height: 1.75;
+}
+.trait-sparkle {
+  position: absolute;
+  top: 16px; right: 16px;
+  font-size: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.trait-card:hover .trait-sparkle { opacity: 1; animation: sparkleAnim 1s ease infinite; }
+
+/* ============================
+   CHAPTER G — GOLDEN REASONS
+============================ */
+#chapter-g {
+  background: linear-gradient(160deg, #fff8f0 0%, #fff0f5 100%);
+}
+
+.reasons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.reason-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px 16px;
+  text-align: center;
+  border: 1px solid rgba(232,137,154,0.15);
+  box-shadow: 0 3px 15px rgba(200,131,110,0.07);
+  transition: all 0.35s ease;
+  position: relative;
+  cursor: default;
+}
+.reason-card:hover {
+  transform: translateY(-6px) rotate(-1deg);
+  box-shadow: 0 15px 40px rgba(200,131,110,0.2);
+  border-color: var(--deep-pink);
+}
+.reason-card:hover .reason-heart {
+  opacity: 1;
+  transform: scale(1.2);
+}
+.reason-num {
+  font-family: 'Dancing Script', cursive;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 6px;
+}
+.reason-icon {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+  display: block;
+}
+.reason-text {
+  font-size: 0.82rem;
+  color: var(--text-dark);
+  font-weight: 500;
+  line-height: 1.5;
+}
+.reason-heart {
+  position: absolute;
+  bottom: 8px; right: 10px;
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.reasons-page-note {
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.4rem;
+  color: var(--text-mid);
+  padding: 30px 20px;
+  position: relative;
+}
+
+/* ============================
+   CHAPTER E — EVERY MOMENT
+============================ */
+#chapter-e {
+  background: linear-gradient(160deg, #f0f7ff 0%, #f8f0ff 60%, #fff0f5 100%);
+}
+
+.story-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.story-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+}
+.story-block.reverse { direction: rtl; }
+.story-block.reverse > * { direction: ltr; }
+
+.story-visual {
+  text-align: center;
+  font-size: 5rem;
+  filter: drop-shadow(0 10px 30px rgba(200,131,110,0.2));
+  animation: iconFloat 4s ease-in-out infinite;
+}
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-12px) rotate(3deg); }
+}
+.story-visual:nth-child(2) { animation-delay: 1s; }
+
+.story-text h3 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.8rem;
+  color: var(--rose-gold);
+  margin-bottom: 12px;
+}
+.story-text p {
+  font-size: 0.92rem;
+  color: var(--text-mid);
+  line-height: 1.9;
+  margin-bottom: 12px;
+}
+.story-quote {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.1rem;
+  color: var(--light-purple);
+  font-style: italic;
+  border-left: 2px solid var(--lavender);
+  padding-left: 16px;
+  margin-top: 14px;
+}
+
+/* Timeline */
+.story-timeline {
+  position: relative;
+  max-width: 700px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--pink), var(--lavender));
+  transform: translateX(-50%);
+}
+.timeline-item {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: calc(50% + 30px);
+  margin-bottom: 40px;
+  position: relative;
+}
+.timeline-item:nth-child(even) {
+  justify-content: flex-start;
+  padding-right: 0;
+  padding-left: calc(50% + 30px);
+}
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  top: 12px;
+  width: 12px; height: 12px;
+  background: var(--deep-pink);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 0 4px rgba(232,137,154,0.3);
+}
+.timeline-content {
+  background: white;
+  border-radius: 14px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 20px rgba(200,131,110,0.1);
+  max-width: 240px;
+  border: 1px solid rgba(232,137,154,0.2);
+}
+.timeline-emoji { font-size: 1.4rem; margin-bottom: 6px; }
+.timeline-title {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--rose-gold);
+  margin-bottom: 4px;
+}
+.timeline-desc {
+  font-size: 0.78rem;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+
+/* Constellation */
+.constellation {
+  text-align: center;
+  padding: 40px 20px;
+  position: relative;
+}
+.constellation-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.4rem;
+  color: var(--light-purple);
+  margin-bottom: 10px;
+}
+.stars-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.star-el {
+  font-size: 1rem;
+  animation: starTwinkle 2s ease-in-out infinite;
+  cursor: pointer;
+}
+.star-el:nth-child(2n) { animation-delay: 0.3s; font-size: 0.7rem; }
+.star-el:nth-child(3n) { animation-delay: 0.6s; font-size: 1.3rem; }
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.5; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* ============================
+   CHAPTER P — PHOTOS
+============================ */
+#chapter-p {
+  background: linear-gradient(160deg, #fef9f0 0%, #fff0f5 100%);
+}
+
+.scrapbook {
+  position: relative;
+  padding: 20px 0;
+}
+
+/* Paper texture overlay */
+.scrapbook::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(255,200,180,0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(200,180,255,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+.polaroid-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.polaroid {
+  background: white;
+  padding: 16px 16px 40px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  border-radius: 4px;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  position: relative;
+}
+.polaroid:hover{
+    transform:rotate(0deg) scale(1.05);
+    z-index:100;
+    box-shadow:0 20px 45px rgba(0,0,0,.18);
+}
+.polaroid:nth-child(odd) { transform: rotate(-2deg); }
+.polaroid:nth-child(even) { transform: rotate(1.5deg); }
+.polaroid:nth-child(3n) { transform: rotate(-1deg); }
+.polaroid:hover .polaroid-note { opacity: 1; }
+
+.polaroid-img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 2px;
+  background: linear-gradient(135deg, var(--pink) 0%, var(--lavender) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  overflow: hidden;
+}
+.large-photo{
+    height:650px;
+    aspect-ratio:auto !important;
+    overflow:hidden;
+}
+
+.large-photo .photo-img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    object-position:center;
+    background:#fff;
+}
+.last-photo{
+    object-fit: cover !important;
+    object-position: center top !important;
+}
+/* Placeholder style for photos */
+.photo-placeholder {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+    display:block;
+    transition:transform .4s ease;
+
+}
+
+.polaroid:hover .photo-img {
+  transform: scale(1.05);
+}
+.polaroid-caption{
+    margin-top:14px;
+    text-align:center;
+    font-family:'Dancing Script', cursive;
+    font-size:1rem;
+    color:#b66b83;
+    line-height:1.5;
+    padding:0 10px;
+    position:relative;
+    bottom:auto;
+    left:auto;
+    right:auto;
+}
+.polaroid-tape{
+    position:absolute;
+    width:58px;
+    height:20px;
+    background:rgba(255,233,132,.75);
+    top:-10px;
+    left:50%;
+    transform:translateX(-50%) rotate(-3deg);
+    border-radius:2px;
+    box-shadow:0 2px 5px rgba(0,0,0,.08);
+}
+.polaroid-note {
+  position: absolute;
+  top: 50%;
+  left: 0; right: 0;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.95);
+  padding: 12px;
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1rem;
+  color: var(--rose-gold);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.polaroid-large{
+    grid-column:span 1;
+}
+
+.polaroid-large .photo-placeholder{
+    aspect-ratio:3/4;
+}
+
+.polaroid-large .photo-img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+}
+.polaroid:nth-child(odd){
+    transform:rotate(-2deg);
+}
+
+.polaroid:nth-child(even){
+    transform:rotate(2deg);
+}
+
+.polaroid:hover{
+    transform:rotate(0deg) scale(1.08);
+    z-index:20;
+    transition:.35s;
+}
+
+
+.film-frame {
+  flex: 1;
+  min-width: 120px;
+  background: linear-gradient(135deg, #ffd6e0, #ddb8f5);
+  border-radius: 4px;
+  aspect-ratio: 3/4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.film-frame::before, .film-frame::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 8px;
+  background: #222;
+}
+.film-frame::before { top: 0; }
+.film-frame::after { bottom: 0; }
+
+.scrapbook-doodles {
+  position: absolute;
+  pointer-events: none;
+  font-size: 1.5rem;
+  opacity: 0.4;
+  animation: doodleDrift 6s ease-in-out infinite;
+}
+@keyframes doodleDrift {
+  0%, 100% { transform: rotate(-10deg) translateY(0); }
+  50% { transform: rotate(10deg) translateY(-15px); }
+}
+
+.photo-end-note {
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5rem;
+  color: var(--text-mid);
+  padding: 40px 20px;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* ============================
+   CHAPTER I — INFINITY
+============================ */
+#chapter-i {
+  background: linear-gradient(160deg, #f8f0ff 0%, #fff0f5 40%, #fff8f0 100%);
+  text-align: center;
+}
+
+.letter-container {
+  max-width: 680px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 24px;
+  padding: 60px 50px;
+  box-shadow: 0 12px 60px rgba(200,131,110,0.15);
+  position: relative;
+  border: 1px solid rgba(232,137,154,0.2);
+}
+.letter-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: 
+    radial-gradient(circle at 10% 10%, rgba(255,200,215,0.15) 0%, transparent 50%),
+    radial-gradient(circle at 90% 90%, rgba(200,180,255,0.15) 0%, transparent 50%);
+  border-radius: 24px;
+  pointer-events: none;
+}
+
+.letter-greeting {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.4rem;
+  color: var(--rose-gold);
+  margin-bottom: 30px;
+}
+.letter-body {
+  font-size: 0.95rem;
+  color: var(--text-mid);
+  line-height: 2;
+  text-align: left;
+  margin-bottom: 20px;
+}
+.letter-body strong {
+  color: var(--rose-gold);
+  font-weight: 600;
+}
+.letter-para {
+  margin-bottom: 18px;
+}
+.letter-wishes {
+  background: linear-gradient(135deg, #fff0f5, #f8f0ff);
+  border-radius: 16px;
+  padding: 24px;
+  margin: 24px 0;
+}
+.wish-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  border-bottom: 1px dashed rgba(232,137,154,0.3);
+}
+.wish-item:last-child { border-bottom: none; }
+.wish-icon { font-size: 1.1rem; }
+.letter-sign {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2rem;
+  color: var(--rose-gold);
+  text-align: right;
+  margin-top: 30px;
+}
+
+/* Final animation */
+.final-scene {
+  position: relative;
+  padding: 60px 20px;
+  text-align: center;
+  overflow: hidden;
+}
+.final-cake {
+  font-size: 80px;
+  display: block;
+  margin: 0 auto 20px;
+  animation: cakeFloat 3s ease-in-out infinite;
+}
+.final-text {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: var(--rose-gold);
+  margin-bottom: 30px;
+}
+
+/* Confetti */
+.confetti-piece {
+  position: fixed;
+  top: -10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  animation: confettiFall linear forwards;
+  pointer-events: none;
+  z-index: 200;
+}
+@keyframes confettiFall {
+  0% { top: -10px; opacity: 1; transform: rotate(0deg) translateX(0); }
+  100% { top: 105vh; opacity: 0; transform: rotate(720deg) translateX(100px); }
+}
+
+/* Bloom flowers */
+.bloom {
+  position: absolute;
+  font-size: 2rem;
+  animation: bloomAnim 1.5s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes bloomAnim {
+  0% { opacity: 0; transform: scale(0) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.3) rotate(20deg); }
+  100% { opacity: 0; transform: scale(1) rotate(360deg) translateY(-100px); }
+}
+
+/* ============================
+   SECTION DECORATIONS
+============================ */
+.section-flowers {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  font-size: 1.5rem;
+  margin-bottom: 40px;
+  opacity: 0.7;
+}
+.flower-bounce {
+  animation: flowerBounce 2s ease-in-out infinite;
+}
+.flower-bounce:nth-child(2) { animation-delay: 0.3s; }
+.flower-bounce:nth-child(3) { animation-delay: 0.6s; }
+@keyframes flowerBounce {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-8px) rotate(5deg); }
+}
+
+/* ============================
+   RESPONSIVE
+============================ */
+@media (max-width: 768px) {
+  nav { padding: 14px 20px; }
+  .nav-links { display: none; }
+  .section-inner { padding: 70px 16px; }
+  .story-block { grid-template-columns: 1fr; gap: 30px; }
+  .story-block.reverse { direction: ltr; }
+  .story-visual { font-size: 3.5rem; }
+  .polaroid-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .polaroid-large { grid-column: span 2; }
+  .letter-container { padding: 36px 24px; }
+  .timeline-line { left: 20px; }
+  .timeline-item { justify-content: flex-start; padding-right: 0; padding-left: 50px; }
+  .timeline-item:nth-child(even) { padding-left: 50px; }
+  .timeline-dot { left: 20px; }
+  .timeline-content { max-width: 100%; }
+  .film-strip { display: none; }
+  .reasons-grid { grid-template-columns: repeat(2, 1fr); }
+  .trait-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .polaroid-grid { grid-template-columns: 1fr; }
+  .polaroid-large { grid-column: span 1; }
+  .polaroid-large .photo-placeholder { aspect-ratio: 1; }
+  .reasons-grid { grid-template-columns: 1fr; }
+  .hero-cake { font-size: 70px; }
+}
+
+/* ============================
+   SCROLL ANIMATIONS
+============================ */
+[data-aos] { visibility: visible !important; }
+
+/* Fireflies */
+.firefly {
+  position: fixed;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--soft-gold);
+  box-shadow: 0 0 6px 2px rgba(232,201,110,0.6);
+  pointer-events: none;
+  z-index: 2;
+  animation: fireflyMove ease-in-out infinite;
+}
+@keyframes fireflyMove {
+  0%, 100% { opacity: 0; transform: translate(0, 0) scale(0.5); }
+  25% { opacity: 1; transform: translate(30px, -20px) scale(1); }
+  50% { opacity: 0.7; transform: translate(-20px, -40px) scale(0.8); }
+  75% { opacity: 1; transform: translate(40px, -10px) scale(1.1); }
+}
+
+/* ============================
+   FOOTER
+============================ */
+footer {
+  background: linear-gradient(135deg, #fff0f5, #f8f0ff);
+  text-align: center;
+  padding: 30px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.1rem;
+  color: var(--text-light);
+  border-top: 1px solid rgba(232,137,154,0.2);
+}
+
+/* Interactive star click */
+.star-burst {
+  position: fixed;
+  pointer-events: none;
+  z-index: 500;
+  animation: starBurst 0.6s ease-out forwards;
+}
+@keyframes starBurst {
+  0% { transform: scale(0) rotate(0deg); opacity: 1; }
+  100% { transform: scale(2.5) rotate(45deg); opacity: 0; }
+}
+
+/* Flower petal fall */
+.petal-fall {
+  position: fixed;
+  pointer-events: none;
+  z-index: 500;
+  font-size: 1rem;
+  animation: petalDrop 1.5s ease-out forwards;
+}
+@keyframes petalDrop {
+  0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+  100% { opacity: 0; transform: translateY(200px) rotate(720deg); }
+}
+
+/* Butterfly fly away */
+.butterfly-el {
+  position: absolute;
+  font-size: 1.5rem;
+  animation: butterflyFly 0.8s ease-out forwards;
+  pointer-events: none;
+  z-index: 100;
+}
+@keyframes butterflyFly {
+  0% { opacity: 1; transform: translate(0,0) scale(1); }
+  100% { opacity: 0; transform: translate(80px, -100px) scale(0.5); }
+}
+
+/* ======================================
+   FLOATING CHERRY BLOSSOMS
+====================================== */
+
+.petals-container{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:1;
+}
+
+.petal{
+
+position:absolute;
+
+top:-120px;
+
+font-size:28px;
+
+opacity:.9;
+
+user-select:none;
+
+animation:fall linear infinite;
+
+filter:drop-shadow(0 5px 8px rgba(0,0,0,.12));
+
+}
+
+.petal:nth-child(1){left:2%;animation-duration:14s;}
+.petal:nth-child(2){left:8%;animation-duration:17s;animation-delay:1s;}
+.petal:nth-child(3){left:14%;animation-duration:13s;}
+.petal:nth-child(4){left:20%;animation-duration:18s;}
+.petal:nth-child(5){left:27%;animation-duration:16s;}
+.petal:nth-child(6){left:33%;animation-duration:15s;}
+.petal:nth-child(7){left:40%;animation-duration:19s;}
+.petal:nth-child(8){left:46%;animation-duration:12s;}
+.petal:nth-child(9){left:52%;animation-duration:17s;}
+.petal:nth-child(10){left:58%;animation-duration:14s;}
+.petal:nth-child(11){left:64%;animation-duration:16s;}
+.petal:nth-child(12){left:70%;animation-duration:18s;}
+.petal:nth-child(13){left:76%;animation-duration:13s;}
+.petal:nth-child(14){left:82%;animation-duration:15s;}
+.petal:nth-child(15){left:88%;animation-duration:17s;}
+.petal:nth-child(16){left:94%;animation-duration:20s;}
+.petal:nth-child(17){left:98%;animation-duration:15s;}
+.petal:nth-child(18){left:36%;animation-duration:18s;}
+.petal:nth-child(19){left:60%;animation-duration:14s;}
+.petal:nth-child(20){left:24%;animation-duration:16s;}
+
+@keyframes fall{
+
+0%{
+
+transform:
+translateY(-150px)
+translateX(0)
+rotate(0deg)
+scale(.8);
+
+opacity:0;
+
+}
+
+10%{
+
+opacity:1;
+
+}
+
+50%{
+
+transform:
+translateY(50vh)
+translateX(40px)
+rotate(180deg)
+scale(1);
+
+}
+
+100%{
+
+transform:
+translateY(120vh)
+translateX(-40px)
+rotate(360deg)
+scale(.9);
+
+opacity:0;
+
+}
+
+}
+/* ===============================
+   FLOATING DOODLES
+================================ */
+
+.floating-doodles{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:2;
+}
+
+.doodle{
+    position:absolute;
+    font-size:32px;
+    animation:floaty 6s ease-in-out infinite;
+    filter:drop-shadow(0 5px 8px rgba(0,0,0,.08));
+}
+
+.doodle:nth-child(1){top:10%;left:8%;}
+.doodle:nth-child(2){top:18%;right:10%;}
+.doodle:nth-child(3){top:35%;left:4%;}
+.doodle:nth-child(4){top:60%;right:8%;}
+.doodle:nth-child(5){top:72%;left:15%;}
+.doodle:nth-child(6){top:22%;left:75%;}
+.doodle:nth-child(7){top:82%;right:20%;}
+.doodle:nth-child(8){top:45%;right:28%;}
+
+@keyframes floaty{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-18px);
+    }
+}
+
+.gift-row{
+    margin-top:6px;
+margin-bottom:10px;
+    font-size:34px;
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    flex-wrap:wrap;
+    animation:giftBounce 2.8s ease-in-out infinite;
+}
+
+@keyframes giftBounce{
+
+0%,100%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-8px);
+}
+
+}
+
+/* ==============================
+   FAIRY LIGHTS
+============================== */
+
+.fairy-lights{
+    position:absolute;
+    top:90px;
+    left:0;
+    width:100%;
+    height:80px;
+    pointer-events:none;
+    z-index:3;
+}
+
+.light-wire{
+    position:absolute;
+    width:100%;
+    height:60px;
+    border-bottom:3px solid rgba(255,190,120,.4);
+    border-radius:0 0 50% 50%;
+}
+
+.light{
+    position:absolute;
+    width:16px;
+    height:16px;
+    border-radius:50%;
+    background:#fff8cf;
+    box-shadow:
+        0 0 8px #fff8cf,
+        0 0 20px #ffe58d,
+        0 0 35px #ffd257;
+    animation:twinkle 2.2s infinite alternate;
+}
+.light:nth-child(2){top:90px;}
+.light:nth-child(3){top:105px;}
+.light:nth-child(4){top:85px;}
+.light:nth-child(5){top:102px;}
+.light:nth-child(6){top:82px;}
+.light:nth-child(7){top:103px;}
+.light:nth-child(8){top:84px;}
+.light:nth-child(9){top:102px;}
+.light:nth-child(10){top:83px;}
+.light:nth-child(11){top:103px;}
+.light:nth-child(12){top:82px;}
+.light:nth-child(13){top:102px;}
+.light:nth-child(14){top:84px;}
+.light:nth-child(15){top:104px;}
+
+@keyframes twinkle{
+
+0%{
+opacity:.4;
+transform:scale(.8);
+}
+
+100%{
+opacity:1;
+transform:scale(1.3);
+}
+
+}
+/* ===============================
+   HANGING BIRTHDAY DECORATIONS
+=================================*/
+
+.hanging-decorations{
+    position:absolute;
+    top:20px;
+    left:0;
+    width:100%;
+    height:260px;
+    pointer-events:none;
+    z-index:2;
+}
+
+.hanger{
+    position:absolute;
+    top:0;
+    font-size:2.5rem;
+
+    padding-top:180px;      /* move emoji to bottom */
+
+    transform-origin:top center;
+
+    animation:swing 4.5s ease-in-out infinite;
+}
+
+/* Hanging string */
+.hanger::before{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:0;
+
+    width:2px;
+    height:180px;
+
+    background:linear-gradient(
+        to bottom,
+        rgba(180,180,180,.2),
+        rgba(150,150,150,.7)
+    );
+
+    transform:translateX(-50%);
+}
+
+/* Small knot */
+
+.hanger::after{
+    content:"";
+    position:absolute;
+    top:-5px;
+    left:50%;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#e3cfcf;
+    transform:translateX(-50%);
+}
+
+@keyframes swing{
+
+    0%{
+        transform:rotate(-10deg);
+    }
+
+    25%{
+        transform:rotate(-4deg);
+    }
+
+    50%{
+        transform:rotate(10deg);
+    }
+
+    75%{
+        transform:rotate(4deg);
+    }
+
+    100%{
+        transform:rotate(-10deg);
+    }
+
+}
+.hanging-decor{
+    position:absolute;
+    top:90px;
+    width:100%;
+    height:150px;
+    left:0;
+    pointer-events:none;
+    z-index:2;
+}
+
+.hang{
+    position:absolute;
+    top:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.hang::before{
+    content:"";
+    width:2px;
+    height:80px;
+    background:rgba(190,170,170,.45);
+}
+
+.hang span{
+    font-size:34px;
+    animation:hangSwing 3s ease-in-out infinite;
+    transform-origin:top center;
+}
+
+@keyframes hangSwing{
+
+0%,100%{
+transform:rotate(-8deg);
+}
+
+50%{
+transform:rotate(8deg);
+}
+
+}
+.hero-top-decor{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:18px;
+    font-size:34px;
+    margin-bottom:18px;
+}
+
+.hero-top-decor span{
+    animation:heroFloat 3s ease-in-out infinite;
+}
+
+.hero-top-decor span:nth-child(2){animation-delay:.2s;}
+.hero-top-decor span:nth-child(3){animation-delay:.4s;}
+.hero-top-decor span:nth-child(4){animation-delay:.6s;}
+.hero-top-decor span:nth-child(5){animation-delay:.8s;}
+.hero-top-decor span:nth-child(6){animation-delay:1s;}
+.hero-top-decor span:nth-child(7){animation-delay:1.2s;}
+.hero-top-decor span:nth-child(8){animation-delay:1.4s;}
+.hero-top-decor span:nth-child(9){animation-delay:1.6s;}
+.hero-top-decor span:nth-child(10){animation-delay:1.8s;}
+
+@keyframes heroFloat{
+
+0%,100%{
+transform:translateY(0px) rotate(-5deg);
+}
+
+50%{
+transform:translateY(-8px) rotate(5deg);
+}
+
+}
+
+/* ======================================
+   CONFETTI
+====================================== */
+
+.confetti{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    overflow:visible;
+    z-index:1;
+}
+
+.confetti span{
+    position:absolute;
+    width:10px;
+    height:18px;
+    border-radius:4px;
+    animation:confettiFloat linear infinite;
+    opacity:.9;
+}
+
+.confetti span:nth-child(1){
+left:48%;
+top:45%;
+background:#ff7ca8;
+animation-duration:5s;
+animation-delay:0s;
+}
+
+.confetti span:nth-child(2){
+left:52%;
+top:44%;
+background:#ffd966;
+animation-duration:4.5s;
+animation-delay:.5s;
+}
+
+.confetti span:nth-child(3){
+left:46%;
+top:46%;
+background:#8ed1fc;
+animation-duration:5.5s;
+animation-delay:1s;
+}
+
+.confetti span:nth-child(4){
+left:54%;
+top:47%;
+background:#c8f7a6;
+animation-duration:6s;
+animation-delay:.8s;
+}
+
+.confetti span:nth-child(5){
+left:50%;
+top:42%;
+background:#ff99cc;
+animation-duration:5.8s;
+animation-delay:1.3s;
+}
+
+.confetti span:nth-child(6){
+left:47%;
+top:44%;
+background:#ffe082;
+animation-duration:4.8s;
+animation-delay:.6s;
+}
+
+.confetti span:nth-child(7){
+left:53%;
+top:43%;
+background:#cdb4ff;
+animation-duration:5.4s;
+animation-delay:.9s;
+}
+
+.confetti span:nth-child(8){
+left:49%;
+top:46%;
+background:#ffb3ba;
+animation-duration:6s;
+animation-delay:.2s;
+}
+
+@keyframes confettiFloat{
+
+0%{
+transform:translate(0,0) rotate(0deg);
+opacity:1;
+}
+
+100%{
+transform:
+translate(
+calc(-150px + 300px * var(--x)),
+-250px)
+rotate(720deg);
+
+opacity:0;
+}
+
+}
+
+/* ======================================
+   FLOATING HEARTS
+====================================== */
+
+.floating-hearts{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:2;
+}
+
+.floating-heart{
+    position:absolute;
+    font-size:28px;
+    opacity:.75;
+    animation:heartFloat linear infinite;
+    filter:drop-shadow(0 0 10px rgba(255,120,170,.35));
+}
+
+.floating-heart:nth-child(1){
+left:8%;
+bottom:-40px;
+animation-duration:10s;
+animation-delay:0s;
+}
+
+.floating-heart:nth-child(2){
+left:22%;
+bottom:-80px;
+font-size:20px;
+animation-duration:12s;
+animation-delay:2s;
+}
+
+.floating-heart:nth-child(3){
+left:40%;
+bottom:-50px;
+font-size:30px;
+animation-duration:11s;
+animation-delay:1s;
+}
+
+.floating-heart:nth-child(4){
+left:58%;
+bottom:-70px;
+font-size:22px;
+animation-duration:13s;
+animation-delay:3s;
+}
+
+.floating-heart:nth-child(5){
+left:74%;
+bottom:-40px;
+font-size:26px;
+animation-duration:10s;
+animation-delay:1.5s;
+}
+
+.floating-heart:nth-child(6){
+left:90%;
+bottom:-60px;
+font-size:24px;
+animation-duration:12s;
+animation-delay:2.5s;
+}
+
+@keyframes heartFloat{
+
+0%{
+transform:translateY(0) translateX(0) rotate(0deg);
+opacity:0;
+}
+
+10%{
+opacity:.8;
+}
+
+50%{
+transform:translateY(-250px) translateX(25px) rotate(10deg);
+}
+
+100%{
+transform:translateY(-550px) translateX(-30px) rotate(-12deg);
+opacity:0;
+}
+
+}
+
+/* ==========================================
+   FLYING BUTTERFLIES
+========================================== */
+
+.flying-butterflies{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:3;
+}
+
+.fly-butterfly{
+    position:absolute;
+    font-size:34px;
+    animation:butterflyFly linear infinite;
+    filter:drop-shadow(0 0 12px rgba(255,170,220,.35));
+}
+
+.fly-butterfly:nth-child(1){
+top:18%;
+left:-10%;
+animation-duration:18s;
+animation-delay:0s;
+}
+
+.fly-butterfly:nth-child(2){
+top:35%;
+left:-15%;
+font-size:26px;
+animation-duration:22s;
+animation-delay:4s;
+}
+
+.fly-butterfly:nth-child(3){
+top:55%;
+left:-8%;
+font-size:30px;
+animation-duration:20s;
+animation-delay:2s;
+}
+
+.fly-butterfly:nth-child(4){
+top:72%;
+left:-12%;
+font-size:24px;
+animation-duration:24s;
+animation-delay:6s;
+}
+
+.fly-butterfly:nth-child(5){
+top:48%;
+left:-18%;
+font-size:28px;
+animation-duration:21s;
+animation-delay:8s;
+}
+
+@keyframes butterflyFly{
+
+0%{
+transform:
+translateX(0)
+translateY(0)
+rotate(-8deg)
+scale(.8);
+opacity:0;
+}
+
+10%{
+opacity:1;
+}
+
+25%{
+transform:
+translateX(28vw)
+translateY(-35px)
+rotate(10deg)
+scale(1);
+}
+
+50%{
+transform:
+translateX(55vw)
+translateY(25px)
+rotate(-12deg)
+scale(1.08);
+}
+
+75%{
+transform:
+translateX(80vw)
+translateY(-25px)
+rotate(8deg)
+scale(.95);
+}
+
+100%{
+transform:
+translateX(120vw)
+translateY(10px)
+rotate(-8deg)
+scale(.8);
+opacity:0;
+}
+
+}
+/* ==========================================
+   SCRAPBOOK RIBBON CORNERS
+========================================== */
+
+.corner-ribbon,
+.corner-flower,
+.corner-star{
+
+position:absolute;
+pointer-events:none;
+animation:cornerFloat 4s ease-in-out infinite;
+z-index:15;
+
+}
+
+/* ribbons */
+
+.corner-ribbon{
+
+font-size:55px;
+
+}
+
+/* flowers */
+
+.corner-flower{
+
+font-size:42px;
+
+}
+
+/* stars */
+
+.corner-star{
+
+font-size:32px;
+
+}
+
+/* top left */
+
+.ribbon-tl{
+
+top:15px;
+left:18px;
+transform:rotate(-18deg);
+
+}
+
+.flower-tl{
+
+top:75px;
+left:35px;
+
+}
+
+/* top right */
+
+.ribbon-tr{
+
+top:15px;
+right:18px;
+transform:rotate(18deg);
+
+}
+
+.flower-tr{
+
+top:75px;
+right:35px;
+
+}
+
+/* bottom left */
+
+.star-bl{
+
+bottom:20px;
+left:30px;
+
+}
+
+/* bottom right */
+
+.star-br{
+
+bottom:20px;
+right:30px;
+
+}
+
+@keyframes cornerFloat{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-8px);
+
+}
+
+}
+/* ===================================
+      HERO STICKER CLOUD
+=================================== */
+
+.global-sticker-cloud{
+
+position:absolute;
+
+inset:0;
+
+pointer-events:none;
+
+z-index:4;
+
+overflow:hidden;
+
+}
+
+.sticker{
+
+position:absolute;
+
+font-size:30px;
+
+animation:stickerFloat 5s ease-in-out infinite;
+
+filter:drop-shadow(0 6px 10px rgba(255,180,210,.30));
+
+}
+
+/* LEFT SIDE */
+
+.s1{top:5%;left:2%;}
+.s2{top:15%;left:8%;}
+.s3{top:30%;left:3%;}
+.s4{top:45%;left:10%;}
+.s5{top:60%;left:5%;}
+.s6{top:75%;left:8%;}
+.s7{top:88%;left:3%;}
+.s8{top:25%;left:15%;}
+.s9{top:50%;left:17%;}
+.s10{top:80%;left:16%;}
+
+/* RIGHT SIDE */
+
+.s11{top:6%;right:3%;}
+.s12{top:18%;right:8%;}
+.s13{top:35%;right:5%;}
+.s14{top:50%;right:12%;}
+.s15{top:68%;right:6%;}
+.s16{top:82%;right:8%;}
+.s17{top:92%;right:3%;}
+.s18{top:28%;right:15%;}
+.s19{top:55%;right:17%;}
+.s20{top:76%;right:14%;}
+
+.sticker:nth-child(odd){
+
+animation-duration:5s;
+
+}
+
+.sticker:nth-child(even){
+
+animation-duration:6.5s;
+
+}
+
+@keyframes stickerFloat{
+
+0%,100%{
+
+transform:translateY(0px) rotate(-6deg);
+
+}
+
+50%{
+
+transform:translateY(-12px) rotate(6deg);
+
+}
+
+}
+/* ===============================
+   Celebration Garland
+================================*/
+
+.celebration-garland{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:22px;
+
+    margin:28px auto 45px;
+
+    font-size:2rem;
+
+    flex-wrap:wrap;
+
+    user-select:none;
+
+    position:relative;
+
+    z-index:5;
+
+}
+
+.celebration-garland span{
+
+    display:inline-block;
+
+    animation:garlandFloat 4s ease-in-out infinite;
+
+    filter:drop-shadow(0 8px 12px rgba(255,170,190,.30));
+
+}
+
+.celebration-garland span:nth-child(odd){
+
+    animation-delay:.4s;
+
+}
+
+.celebration-garland span:nth-child(even){
+
+    animation-delay:1.2s;
+
+}
+
+@keyframes garlandFloat{
+
+    0%,100%{
+
+        transform:
+        translateY(0px)
+        rotate(-4deg);
+
+    }
+
+    50%{
+
+        transform:
+        translateY(-12px)
+        rotate(4deg);
+
+    }
+
+}
+</style>
+</head>
+<body>
+    <div class="global-sticker-cloud">
+
+<span class="sticker s1">🎀</span>
+<span class="sticker s2">🌸</span>
+<span class="sticker s3">🧸</span>
+<span class="sticker s4">🦋</span>
+<span class="sticker s5">✨</span>
+<span class="sticker s6">💖</span>
+<span class="sticker s7">🍓</span>
+<span class="sticker s8">🌷</span>
+<span class="sticker s9">🎁</span>
+<span class="sticker s10">⭐</span>
+<span class="sticker s11">☁️</span>
+<span class="sticker s12">💌</span>
+<span class="sticker s13">🌼</span>
+<span class="sticker s14">🌺</span>
+<span class="sticker s15">🩷</span>
+<span class="sticker s16">🐣</span>
+<span class="sticker s17">🌹</span>
+<span class="sticker s18">🍀</span>
+<span class="sticker s19">🎈</span>
+<span class="sticker s20">🎂</span>
+
+</div>
+    <div class="petals-container">
+
+<span class="petal">🌸</span>
+<span class="petal">🌸</span>
+<span class="petal">🌷</span>
+<span class="petal">🌼</span>
+<span class="petal">🦋</span>
+<span class="petal">✨</span>
+<span class="petal">💖</span>
+<span class="petal">💗</span>
+<span class="petal">🌺</span>
+<span class="petal">🐣</span>
+<span class="petal">☁️</span>
+<span class="petal">🍓</span>
+<span class="petal">🎀</span>
+<span class="petal">⭐</span>
+<span class="petal">🩷</span>
+<span class="petal">🌸</span>
+<span class="petal">🌸</span>
+<span class="petal">🫧</span>
+<span class="petal">🌙</span>
+<span class="petal">💌</span>
+
+</div>
+<div class="floating-doodles">
+
+<div class="doodle">🎀</div>
+
+<div class="doodle">🦋</div>
+
+<div class="doodle">🌸</div>
+
+<div class="doodle">✨</div>
+
+<div class="doodle">💌</div>
+
+<div class="doodle">☁️</div>
+
+<div class="doodle">🌷</div>
+
+<div class="doodle">💖</div>
+
+</div>
+
+
+<!-- Custom Cursor -->
+<div id="cursor"></div>
+<div id="cursor-trail"></div>
+
+<!-- Secret Message -->
+<div class="secret-msg" id="secret-msg">
+  You found my tiny secret. 😊<br>
+  <small style="font-size:1rem;color:var(--text-light)">This little world was made just for you.</small>
+</div>
+<div id="egg-click-count" data-count="0"></div>
+
+<!-- Ambient Floating Elements -->
+<div class="ambient-container" id="ambient"></div>
+
+<!-- Fireflies -->
+<div id="fireflies"></div>
+
+<!-- ============ LOADING ============ -->
+<div id="loading">
+  <div class="loading-egg" id="loading-egg" onclick="eggClick()">🥚</div>
+  <div class="loading-text">Preparing something special<span class="loading-dots"></span></div>
+  <div class="loading-hearts">
+    <span class="loading-heart">🌸</span>
+    <span class="loading-heart">💖</span>
+    <span class="loading-heart">🌸</span>
+  </div>
+  <div class="loading-progress"><div class="loading-bar"></div></div>
+</div>
+
+<!-- ============ NAV ============ -->
+<nav id="main-nav" style="opacity:0">
+  <div class="nav-logo">Togepi 🌸</div>
+  <ul class="nav-links">
+    <li><a href="#chapter-t">✨ Treasure</a></li>
+    <li><a href="#chapter-o">🌷 One of a Kind</a></li>
+    <li><a href="#chapter-g">🌼 Golden</a></li>
+    <li><a href="#chapter-e">🌹 Every Moment</a></li>
+    <li><a href="#chapter-p">📸 Pages</a></li>
+    <li><a href="#chapter-i">💫 Infinity</a></li>
+  </ul>
+</nav>
+
+<!-- ============================================================ -->
+<!-- 🌸 T — TREASURE (HERO)                                       -->
+<!-- ============================================================ -->
+<section id="chapter-t">
+    <div class="fairy-lights">
+
+<div class="light-wire"></div>
+
+<div class="light"></div>
+<div class="light"></div>
+<div class="light"></div>
+<div class="light"></div>
+<div class="light"></div>
+<div class="light"></div>
+<div class="light"></div>
+<div class="light"></div>
+<div class="light"></div>
+<div class="light"></div>
+<div class="light"></div>
+<div class="light"></div>
+
+</div>
+    <!-- Birthday Ceiling Decorations -->
+<div class="hanging-decorations">
+
+<div class="hanger" style="left:4%;animation-delay:0s;">🎀</div>
+<div class="hanger" style="left:11%;animation-delay:.4s;">🌸</div>
+<div class="hanger" style="left:18%;animation-delay:.8s;">⭐</div>
+<div class="hanger" style="left:25%;animation-delay:1.2s;">🧸</div>
+<div class="hanger" style="left:32%;animation-delay:1.6s;">🎈</div>
+<div class="hanger" style="left:39%;animation-delay:2s;">🦋</div>
+<div class="hanger" style="left:46%;animation-delay:2.4s;">🎁</div>
+<div class="hanger" style="left:53%;animation-delay:2.8s;">💖</div>
+<div class="hanger" style="left:60%;animation-delay:3.2s;">🍓</div>
+<div class="hanger" style="left:67%;animation-delay:3.6s;">🌷</div>
+<div class="hanger" style="left:74%;animation-delay:4s;">☁️</div>
+<div class="hanger" style="left:81%;animation-delay:4.4s;">✨</div>
+<div class="hanger" style="left:88%;animation-delay:4.8s;">🎉</div>
+<div class="hanger" style="left:95%;animation-delay:5.2s;">🎀</div>
+
+</div>
+    <div class="fairy-lights">
+
+<div class="light-wire"></div>
+
+<span class="light" style="left:5%;top:18px;">💡</span>
+<span class="light" style="left:12%;top:38px;">✨</span>
+<span class="light" style="left:20%;top:15px;">🌟</span>
+<span class="light" style="left:30%;top:40px;">💡</span>
+<span class="light" style="left:40%;top:18px;">✨</span>
+<span class="light" style="left:50%;top:38px;">🌟</span>
+<span class="light" style="left:60%;top:18px;">💡</span>
+<span class="light" style="left:70%;top:40px;">✨</span>
+<span class="light" style="left:80%;top:18px;">🌟</span>
+<span class="light" style="left:90%;top:36px;">💡</span>
+
+</div>
+
+</div>
+  <!-- Sparkles in hero -->
+  <span class="hero-sparkle" style="top:15%;left:10%;font-size:1.4rem;animation-duration:2.1s;">✨</span>
+  <span class="hero-sparkle" style="top:20%;right:12%;font-size:1rem;animation-duration:1.7s;animation-delay:0.5s;">⭐</span>
+  <span class="hero-sparkle" style="top:70%;left:8%;font-size:1.2rem;animation-duration:2.5s;animation-delay:1s;">🌸</span>
+  <span class="hero-sparkle" style="top:65%;right:10%;font-size:0.9rem;animation-duration:1.9s;animation-delay:0.3s;">💫</span>
+  <span class="hero-sparkle" style="top:40%;left:5%;font-size:1.5rem;animation-duration:3s;animation-delay:0.8s;">🌷</span>
+  <span class="hero-sparkle" style="top:35%;right:6%;font-size:1.1rem;animation-duration:2.3s;animation-delay:1.2s;">🌼</span>
+
+  <div class="section-inner" style="padding-top:120px;">
+    <div data-aos="fade-down" data-aos-duration="1000">
+
+    <div class="birthday-banner">
+
+<div style="font-size:30px; margin-bottom:8px;">
+🌸 🎀 🧸 🩷 🍓 ✨ 🎂 💌 🦋 ☁️ 🌷
+</div>
+
+<div style="font-size:20px;font-weight:800;letter-spacing:2px;">
+HAPPY BIRTHDAY, MY PRECIOUS TOGEPI
+</div>
+
+<div style="font-size:30px;margin-top:8px;">
+🌷 ☁️ 🦋 💌 🎂 ✨ 🍓 🩷 🧸 🎀 🌸
+</div>
+
+</div>
+
+<br>
+
+<span class="chapter-badge">
+🌸 CHAPTER ONE • T IS FOR TREASURE
+</span>
+    <div class="hero-scene" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="200">
+        <!-- Sticker Cloud -->
+
+<div class="sticker-cloud">
+
+<span class="sticker s1">🎀</span>
+<span class="sticker s2">🌸</span>
+<span class="sticker s3">🧸</span>
+<span class="sticker s4">🦋</span>
+<span class="sticker s5">✨</span>
+<span class="sticker s6">💖</span>
+<span class="sticker s7">🍓</span>
+<span class="sticker s8">🌷</span>
+<span class="sticker s9">🎁</span>
+<span class="sticker s10">☁️</span>
+<span class="sticker s11">⭐</span>
+<span class="sticker s12">🌼</span>
+<span class="sticker s13">💌</span>
+<span class="sticker s14">🌈</span>
+<span class="sticker s15">🌺</span>
+<span class="sticker s16">🩷</span>
+<span class="sticker s17">🎈</span>
+<span class="sticker s18">🐣</span>
+<span class="sticker s19">🌹</span>
+<span class="sticker s20">🍀</span>
+
+</div>
+        <div class="confetti">
+
+<span style="--x:.10"></span>
+<span style="--x:.20"></span>
+<span style="--x:.30"></span>
+<span style="--x:.40"></span>
+<span style="--x:.60"></span>
+<span style="--x:.70"></span>
+<span style="--x:.80"></span>
+<span style="--x:.90"></span>
+
+
+</div>
+<div class="floating-hearts">
+
+<span class="floating-heart">💖</span>
+<span class="floating-heart">💕</span>
+<span class="floating-heart">💗</span>
+<span class="floating-heart">💞</span>
+<span class="floating-heart">💓</span>
+<span class="floating-heart">💝</span>
+
+</div>
+<div class="flying-butterflies">
+
+<span class="fly-butterfly">🦋</span>
+<span class="fly-butterfly">🦋</span>
+<span class="fly-butterfly">🦋</span>
+<span class="fly-butterfly">🦋</span>
+<span class="fly-butterfly">🦋</span>
+
+</div>
+      <div class="balloon-row">
+        <span class="balloon">🎈</span>
+        <span class="balloon">🎀</span>
+        <span class="balloon">🎈</span>
+      </div>
+      <span class="hero-cake" id="birthday-cake" title="Click me!">🎂</span>
+    </div>
+    <div class="celebration-garland">
+
+    <span>🌸</span>
+    <span>🎀</span>
+    <span>🎁</span>
+    <span>🧸</span>
+    <span>💖</span>
+    <span>🍓</span>
+    <span>✨</span>
+    <span>🎂</span>
+    <span>✨</span>
+    <span>🍓</span>
+    <span>💖</span>
+    <span>🧸</span>
+    <span>🎁</span>
+    <span>🎀</span>
+    <span>🌸</span>
+
+</div>
+    <div class="gift-row">
+    🎁 🎀 🧸 💝 🎁 🌸 🎀 🎁
+</div>
+<div class="hero-top-decor">
+    <span>🦋</span>
+    <span>🌸</span>
+    <span>✨</span>
+    <span>💖</span>
+    <span>🍓</span>
+    <span>🎀</span>
+    <span>🌷</span>
+    <span>🎁</span>
+    <span>⭐</span>
+    <span>🧸</span>
+</div>
+
+    <h1 class="hero-title" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+      Happy Birthday,<br>My Precious Togepi 🌸
+    </h1>
+
+    <p class="hero-subtitle" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+      This tiny corner of the internet exists for one reason—and one reason only.
+      It's a small collection of appreciation, of smiles, of memories, of birthday wishes,
+      and of everything beautiful that comes to mind when thinking about you.
+      Made with a lot of care, just for you, on your special day.
+    </p>
+
+    <p class="hero-tagline" data-aos="fade-up" data-aos-delay="500">Every beautiful story deserves a beautiful beginning. ✨</p>
+
+    <div class="tiny-quotes" data-aos="fade-up" data-aos-delay="600">
+      <span class="tiny-q">Today isn't just another day</span>
+      <span class="tiny-q">Today is about celebrating someone truly wonderful</span>
+      <span class="tiny-q">Welcome to your little corner of happiness</span>
+    </div>
+
+    <div data-aos="fade-up" data-aos-delay="700">
+      <a href="#chapter-o" class="btn-primary">Begin Our Story 🌸</a>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <span class="scroll-arrow">▼</span>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 🌷 O — ONE OF A KIND                                         -->
+<!-- ============================================================ -->
+<section id="chapter-o">
+  <div class="section-inner">
+    <div class="section-inner">
+
+<div class="corner-ribbon ribbon-tl">🎀</div>
+<div class="corner-ribbon ribbon-tr">🎀</div>
+
+<div class="corner-flower flower-tl">🌸</div>
+<div class="corner-flower flower-tr">🌷</div>
+
+<div class="corner-star star-bl">✨</div>
+<div class="corner-star star-br">⭐</div>
+
+    <div data-aos="fade-down">
+      <span class="chapter-badge">🌷 Chapter Two · O is for One of a Kind</span>
+    </div>
+
+    <h2 class="section-title" data-aos="fade-up">One of a Kind</h2>
+    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+      Not compared to anyone. Not explained through anyone else.<br>
+      Simply, wonderfully, entirely herself.
+    </p>
+
+    <div class="section-flowers">
+      <span class="flower-bounce">🌸</span>
+      <span class="flower-bounce">🌷</span>
+      <span class="flower-bounce">🌼</span>
+      <span class="flower-bounce">🌹</span>
+      <span class="flower-bounce">🌸</span>
+    </div>
+
+    <div class="trait-grid">
+      <div class="trait-card" data-aos="fade-up" data-aos-delay="0">
+        <span class="trait-sparkle">✨</span>
+        <span class="trait-icon">🌸</span>
+        <div class="trait-title">Kindness That Doesn't Announce Itself</div>
+        <p class="trait-desc">She doesn't make noise about being kind. She just is. It shows up quietly—in the way she responds, the way she listens, the way she remembers things that matter to others even when she doesn't have to.</p>
+      </div>
+
+      <div class="trait-card" data-aos="fade-up" data-aos-delay="80">
+        <span class="trait-sparkle">💫</span>
+        <span class="trait-icon">🌙</span>
+        <div class="trait-title">Patience That Feels Like Peace</div>
+        <p class="trait-desc">There's something quietly reassuring about a person who never rushes you. She gives conversations room to breathe. She gives people space to be imperfect. That's rarer than most people realize.</p>
+      </div>
+
+      <div class="trait-card" data-aos="fade-up" data-aos-delay="160">
+        <span class="trait-sparkle">🌟</span>
+        <span class="trait-icon">😊</span>
+        <div class="trait-title">A Smile That Changes the Room</div>
+        <p class="trait-desc">It happens effortlessly—and that's the part that gets you. An ordinary moment, and then her smile appears, and somehow the whole moment turns brighter. She probably doesn't even know she does it.</p>
+      </div>
+
+      <div class="trait-card" data-aos="fade-up" data-aos-delay="0">
+        <span class="trait-sparkle">✨</span>
+        <span class="trait-icon">🔍</span>
+        <div class="trait-title">A Beautiful Curiosity</div>
+        <p class="trait-desc">She asks questions that actually mean something. Not the polite kind—the kind that tells you she was genuinely listening, genuinely interested, genuinely there in the conversation with you.</p>
+      </div>
+
+      <div class="trait-card" data-aos="fade-up" data-aos-delay="80">
+        <span class="trait-sparkle">💫</span>
+        <span class="trait-icon">💬</span>
+        <div class="trait-title">Honesty That Feels Safe</div>
+        <p class="trait-desc">She tells you what she actually thinks, but in a way that never feels harsh. That's a rare combination—being honest without being unkind. It makes talking to her feel like a safe place to land.</p>
+      </div>
+
+      <div class="trait-card" data-aos="fade-up" data-aos-delay="160">
+        <span class="trait-sparkle">🌟</span>
+        <span class="trait-icon">☀️</span>
+        <div class="trait-title">Positivity That Doesn't Pretend</div>
+        <p class="trait-desc">She doesn't force cheerfulness. But somehow, her presence makes things feel lighter. Not because she pretends everything is fine, but because she has a way of making even the difficult things feel more manageable.</p>
+      </div>
+
+      <div class="trait-card" data-aos="fade-up" data-aos-delay="0">
+        <span class="trait-sparkle">✨</span>
+        <span class="trait-icon">🤗</span>
+        <div class="trait-title">A Caring Nature, Thoroughly</div>
+        <p class="trait-desc">When she cares about someone, she actually cares. It's not performative. She notices. She checks in. She remembers. The kind of caring that doesn't need a reason—it just shows up.</p>
+      </div>
+
+      <div class="trait-card" data-aos="fade-up" data-aos-delay="80">
+        <span class="trait-sparkle">💫</span>
+        <span class="trait-icon">🎀</span>
+        <div class="trait-title">Her Little Habits</div>
+        <p class="trait-desc">The smallest habits often become the biggest reasons to smile. The way she reacts to certain things. Her little expressions. Those tiny, unrepeatable details that make her entirely her own.</p>
+      </div>
+
+      <div class="trait-card" data-aos="fade-up" data-aos-delay="160">
+        <span class="trait-sparkle">🌟</span>
+        <span class="trait-icon">🌿</span>
+        <div class="trait-title">A Warmth That Stays</div>
+        <p class="trait-desc">Long after a conversation ends, there's still a warmth that lingers. That's the kind of presence not everyone has. She leaves good feelings behind, even in ordinary moments, even without trying.</p>
+      </div>
+
+      <div class="trait-card" data-aos="fade-up" data-aos-delay="0">
+        <span class="trait-sparkle">✨</span>
+        <span class="trait-icon">🧸</span>
+        <div class="trait-title">Her Childish, Playful Side</div>
+        <p class="trait-desc">There's something genuinely wonderful about someone who hasn't lost their ability to be silly, curious, and wonderfully childlike. It's not immaturity—it's lightness. And it makes everything more fun.</p>
+      </div>
+
+      <div class="trait-card" data-aos="fade-up" data-aos-delay="80">
+        <span class="trait-sparkle">💫</span>
+        <span class="trait-icon">🏡</span>
+        <div class="trait-title">She Feels Like Comfort</div>
+        <p class="trait-desc">Some people you talk to, and you feel tired afterward. Then there are people who make you feel at ease just by being there. She belongs firmly, unmistakably in the second category.</p>
+      </div>
+
+      <div class="trait-card" data-aos="fade-up" data-aos-delay="160">
+        <span class="trait-sparkle">🌟</span>
+        <span class="trait-icon">🌈</span>
+        <div class="trait-title">Making Ordinary Days Better</div>
+        <p class="trait-desc">The most underrated ability someone can have—turning a perfectly average Tuesday into something you remember. She has that ability. Entirely without effort. That's not something everyone can do.</p>
+      </div>
+    </div>
+
+    <div class="handwritten-note" data-aos="fade-up">
+      Some people leave memories.<br>You leave comfort.
+    </div>
+
+    <div class="handwritten-note" data-aos="fade-up">
+      Beautiful hearts quietly make the world brighter.
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 🌼 G — GOLDEN REASONS                                        -->
+<!-- ============================================================ -->
+<section id="chapter-g">
+  <div class="section-inner">
+    <div data-aos="fade-down">
+      <span class="chapter-badge">🌼 Chapter Three · G is for Golden</span>
+    </div>
+
+    <h2 class="section-title" data-aos="fade-up">60 Golden Reasons</h2>
+    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+      The little things that aren't really little at all.
+    </p>
+
+    <div class="reasons-grid" id="reasons-grid"></div>
+
+    <div class="handwritten-note" data-aos="fade-up" style="margin-top:60px;">
+      The list ends eventually.<br>The reasons probably never will.
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 🌹 E — EVERY MOMENT                                          -->
+<!-- ============================================================ -->
+<section id="chapter-e">
+  <div class="section-inner">
+    <div data-aos="fade-down">
+      <span class="chapter-badge">🌹 Chapter Four · E is for Every Moment</span>
+    </div>
+
+    <h2 class="section-title" data-aos="fade-up">Every Moment Together</h2>
+    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+      Not the distance between us. The connection despite it.
+    </p>
+
+    <div class="story-sections">
+
+      <div class="story-block" data-aos="fade-right">
+        <div class="story-visual">💬</div>
+        <div class="story-text">
+          <h3>Comfortable Conversations</h3>
+          <p>There's a particular kind of conversation that feels effortless—no performance, no trying. Just two people talking, and somehow time disappears. That's what the best conversations feel like.</p>
+          <p>The ones you don't plan. The ones that happen between everything else and quietly become the highlight of the day. Those have always been the best part.</p>
+          <div class="story-quote">The best conversations are rarely planned. They simply become the best part of the day.</div>
+        </div>
+      </div>
+
+      <div class="story-block reverse" data-aos="fade-left">
+        <div class="story-visual">🌙</div>
+        <div class="story-text">
+          <h3>Late-Night Talks</h3>
+          <p>Late at night, when the world gets quieter, some of the most genuine conversations happen. No pretense, no performance—just honesty, comfort, and occasionally saying things that make both of you laugh too loud for how late it is.</p>
+          <p>Those late-night calls have a way of becoming their own kind of memory.</p>
+          <div class="story-quote">Home isn't always a place. Sometimes it's simply the person who makes every day feel lighter.</div>
+        </div>
+      </div>
+
+      <div class="story-block" data-aos="fade-right">
+        <div class="story-visual">📱</div>
+        <div class="story-text">
+          <h3>Random Reels & Silly Things</h3>
+          <p>Sending something ridiculous at 2 PM for no particular reason. A reel that somehow perfectly explains an inside joke. A meme that needs no caption because the other person already knows.</p>
+          <p>Those little gestures—the ones that say "I thought of you" without saying it—matter more than they probably should.</p>
+          <div class="story-quote">It's the little things that keep big connections alive.</div>
+        </div>
+      </div>
+
+      <div class="story-block reverse" data-aos="fade-left">
+        <div class="story-visual">📹</div>
+        <div class="story-text">
+          <h3>Video Calls & Shared Screens</h3>
+          <p>There's something both wonderful and slightly chaotic about video calls—the bad lighting, the slightly awkward silences, the moments where the internet gives up at exactly the wrong time.</p>
+          <p>And yet, those calls always managed to feel like their own special kind of closeness. Worth every frozen screen.</p>
+          <div class="story-quote">Some memories happen in the same place. Ours happened across different places—and somehow feel just as close.</div>
+        </div>
+      </div>
+
+      <div class="story-block" data-aos="fade-right">
+        <div class="story-visual">🤝</div>
+        <div class="story-text">
+          <h3>Support Without Being Asked</h3>
+          <p>The kind of support that shows up before you have to ask for it. The check-in on a difficult day. The "how did it go?" that means someone actually remembered. That kind of thoughtfulness is something people notice, and never forget.</p>
+          <div class="story-quote">Distance never changed what mattered most.</div>
+        </div>
+      </div>
+
+      <div class="story-block reverse" data-aos="fade-left">
+        <div class="story-visual">🌟</div>
+        <div class="story-text">
+          <h3>Future Adventures</h3>
+          <p>There's something quietly exciting about having things to look forward to. Conversations about places to explore, food to try, moments yet to be photographed in badly-lit but genuinely happy pictures.</p>
+          <p>The best chapters of any story are the ones still being written.</p>
+          <div class="story-quote">The best part of looking forward is knowing someone will be there when you arrive.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Timeline -->
+    <div class="handwritten-note" data-aos="fade-up" style="margin-bottom:40px;">
+      Tiny Moments That Became Memories
+    </div>
+
+    <div class="story-timeline" data-aos="fade-up">
+      <div class="timeline-line"></div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-emoji">👋</div>
+          <div class="timeline-title">The Beginning</div>
+          <div class="timeline-desc">Every connection starts with one moment. One conversation that felt different from the rest.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-emoji">💬</div>
+          <div class="timeline-title">The First Real Conversation</div>
+          <div class="timeline-desc">When it stopped being small talk and started being something you actually looked forward to.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-emoji">😂</div>
+          <div class="timeline-title">The First Inside Joke</div>
+          <div class="timeline-desc">One of those moments that doesn't need an explanation because only the two of you understand it.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-emoji">🌙</div>
+          <div class="timeline-title">Late Night, Long Conversation</div>
+          <div class="timeline-desc">The kind that should have ended hours earlier but somehow neither of you wanted to stop.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-emoji">🎂</div>
+          <div class="timeline-title">Today — Her Birthday 🌸</div>
+          <div class="timeline-desc">And the many, many chapters still to come after this one.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Constellation -->
+    <div class="constellation" data-aos="fade-up">
+      <div class="constellation-title">Some stars shine brighter when shared 🌌</div>
+      <div class="stars-row" id="star-row">
+        <span class="star-el" onclick="starClick(this)">⭐</span>
+        <span class="star-el" onclick="starClick(this)">✨</span>
+        <span class="star-el" onclick="starClick(this)">🌟</span>
+        <span class="star-el" onclick="starClick(this)">⭐</span>
+        <span class="star-el" onclick="starClick(this)">💫</span>
+        <span class="star-el" onclick="starClick(this)">✨</span>
+        <span class="star-el" onclick="starClick(this)">🌟</span>
+        <span class="star-el" onclick="starClick(this)">⭐</span>
+        <span class="star-el" onclick="starClick(this)">💫</span>
+        <span class="star-el" onclick="starClick(this)">✨</span>
+        <span class="star-el" onclick="starClick(this)">⭐</span>
+        <span class="star-el" onclick="starClick(this)">🌟</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 📸 P — PAGES OF YOU (PHOTO SCRAPBOOK)                        -->
+<!-- ============================================================ -->
+<section id="chapter-p">
+  <div class="section-inner">
+    <div data-aos="fade-down">
+      <span class="chapter-badge">📸 Chapter Five · P is for Pages</span>
+    </div>
+
+    <h2 class="section-title" data-aos="fade-up">Pages of You</h2>
+    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+      Every photograph is a page. Together, they tell a beautiful story.
+    </p>
+
+    <!-- Scrapbook doodles -->
+    <span class="scrapbook-doodles" style="top:10%;left:3%;">🌸</span>
+    <span class="scrapbook-doodles" style="top:30%;right:4%;animation-delay:1.5s;">🦋</span>
+    <span class="scrapbook-doodles" style="bottom:20%;left:2%;animation-delay:3s;">⭐</span>
+    <span class="scrapbook-doodles" style="bottom:10%;right:3%;animation-delay:2s;">🌷</span>
+
+    <div class="scrapbook">
+      <div class="polaroid-grid">
+
+       <!-- Photo 1: Hero photo — Train window smile -->
+<div class="polaroid" data-aos="fade-up" data-aos-delay="0" onclick="flowerPetalBurst(event)">
+    <div class="polaroid-tape"></div>
+
+    <div class="photo-placeholder">
+        <img src="images/train-window.jpg"
+             alt="Train Window Smile"
+             class="photo-img">
+    </div>
+
+    <div class="polaroid-caption">
+        "A smile that somehow makes ordinary moments feel brighter."
+    </div>
+
+    <div class="polaroid-note">
+        Still one of my favourite pictures.
+    </div>
+</div>
+
+    
+<!-- Photo 2: Café side profile -->
+<div class="polaroid" data-aos="fade-up" data-aos-delay="80" onclick="flowerPetalBurst(event)">
+    <div class="polaroid-tape"></div>
+
+    <div class="photo-placeholder">
+        <img src="images/cafe-side.jpg" class="photo-img" alt="Café Side Profile">
+    </div>
+
+    <div class="polaroid-caption">
+        "Completely unaware of how effortlessly adorable this moment was."
+    </div>
+
+    <div class="polaroid-note">
+        One frame. Countless smiles.
+    </div>
+</div>
+
+<!-- Photo 3: Café front portrait -->
+<div class="polaroid" data-aos="fade-up" data-aos-delay="160" onclick="flowerPetalBurst(event)">
+    <div class="polaroid-tape"></div>
+
+    <div class="photo-placeholder">
+        <img src="images/cafe-front.jpg" class="photo-img" alt="Café Portrait">
+    </div>
+
+    <div class="polaroid-caption">
+        "Simple moments somehow become unforgettable."
+    </div>
+
+    <div class="polaroid-note">
+        This picture quietly became one of my favourites.
+    </div>
+</div>
+
+<!-- Photo 4: Green T-shirt selfie -->
+<div class="polaroid" data-aos="fade-up" data-aos-delay="0" onclick="flowerPetalBurst(event)">
+    <div class="polaroid-tape"></div>
+
+    <div class="photo-placeholder">
+        <img src="images/green-selfie.jpg" class="photo-img" alt="Green T-shirt Selfie">
+    </div>
+
+    <div class="polaroid-caption">
+        "Comfortable, genuine, and completely yourself."
+    </div>
+
+    <div class="polaroid-note">
+        Some smiles deserve their own page.
+    </div>
+</div>
+
+<!-- Photo 5: Peace sign -->
+<div class="polaroid" data-aos="fade-up" data-aos-delay="80" onclick="flowerPetalBurst(event)">
+    <div class="polaroid-tape"></div>
+
+    <div class="photo-placeholder">
+        <img src="images/peace-sign.jpg" class="photo-img" alt="Peace Sign">
+    </div>
+
+    <div class="polaroid-caption">
+        "This picture has way too much happiness packed into one frame."
+    </div>
+
+    <div class="polaroid-note">
+        This one always makes me pause.
+    </div>
+</div>
+
+
+<!-- Photo 7: White floral dress hands under chin -->
+<div class="polaroid" data-aos="fade-up" data-aos-delay="0" onclick="flowerPetalBurst(event)">
+    <div class="polaroid-tape"></div>
+
+    <div class="photo-placeholder">
+        <img src="images/dress-chin.jpg" class="photo-img" alt="Hands Under Chin">
+    </div>
+
+    <div class="polaroid-caption">
+        "Still don't know how someone makes a pose look this cute."
+    </div>
+
+    <div class="polaroid-note">
+        One picture. A thousand happy thoughts.
+    </div>
+</div>
+
+<!-- Photo 8: White floral dress smiling sideways -->
+<div class="polaroid" data-aos="fade-up" data-aos-delay="80" onclick="flowerPetalBurst(event)">
+    <div class="polaroid-tape"></div>
+
+    <div class="photo-placeholder">
+        <img src="images/dress-smile.jpg" class="photo-img last-photo">
+    </div>
+
+    <div class="polaroid-caption">
+        "If happiness had a picture, it'd probably look something like this."
+    </div>
+
+    <div class="polaroid-note">
+        The last page. The best smile.
+    </div>
+</div>
+
+</div>
+</div>
+
+   
+    <p class="photo-end-note" data-aos="fade-up">
+      Maybe today it's just a handful of photographs...<br>
+      But every one of them quietly became another reason to smile.
+    </p>
+
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- ✨ I — INFINITY OF SMILES                                    -->
+<!-- ============================================================ -->
+<section id="chapter-i">
+  <div class="section-inner">
+    <div data-aos="fade-down">
+      <span class="chapter-badge">✨ Chapter Six · I is for Infinity</span>
+    </div>
+
+    <h2 class="section-title" data-aos="fade-up">Infinity of Smiles</h2>
+    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+      Not promises of forever. Just appreciation for every beautiful chapter already shared,<br>
+      and excitement for every one still waiting to happen.
+    </p>
+
+    <div class="letter-container" data-aos="fade-up" data-aos-delay="200">
+      <div class="letter-greeting">Dear Togepi,</div>
+
+      <div class="letter-body">
+        <p class="letter-para">
+          There are things that are genuinely difficult to put into words—not because the feelings aren't there, but because some things feel bigger than any sentence you can write. This is one of those moments. But let me try anyway, because today deserves an honest attempt.
+        </p>
+        <p class="letter-para">
+          Thank you for being yourself. Not a performed version, not a carefully curated one—just genuinely, entirely yourself. That's more valuable than most people realize, and it's something that doesn't go unnoticed.
+        </p>
+        <p class="letter-para">
+          Thank you for being kind in a world that doesn't always reward kindness. For your patience on the days when things were messy and complicated. For making ordinary conversations feel like something worth remembering.
+        </p>
+        <p class="letter-para">
+          Thank you for the laughter. For the random messages. For checking in. For every moment that felt completely unremarkable at the time but somehow turned into something I think about later and smile.
+        </p>
+
+        <div class="letter-wishes">
+          <p style="font-family:'Dancing Script',cursive;font-size:1.2rem;color:var(--rose-gold);margin-bottom:12px;">This year, I wish you...</p>
+          <div class="wish-item"><span class="wish-icon">🌿</span> Health that lets you chase every adventure</div>
+          <div class="wish-item"><span class="wish-icon">☀️</span> Happiness that sneaks up on you in unexpected moments</div>
+          <div class="wish-item"><span class="wish-icon">🕊️</span> Peace, especially on the difficult days</div>
+          <div class="wish-item"><span class="wish-icon">⭐</span> Success in every goal you're quietly working toward</div>
+          <div class="wish-item"><span class="wish-icon">🌸</span> Dreams that feel possible—because they are</div>
+          <div class="wish-item"><span class="wish-icon">📸</span> Beautiful memories that feel even better when you look back</div>
+          <div class="wish-item"><span class="wish-icon">🗺️</span> Wonderful adventures, planned and completely unplanned</div>
+          <div class="wish-item"><span class="wish-icon">😊</span> Countless reasons to smile, even on the Tuesdays</div>
+        </div>
+
+        <p class="letter-para">
+          Birthdays are funny things. They arrive every year without fail, but they don't always feel like much more than another date on the calendar. Today, though, this one is worth pausing for. Because the person this birthday belongs to is worth pausing for.
+        </p>
+        <p class="letter-para">
+          <strong>Happy Birthday once again, Togepi.</strong>
+        </p>
+        <p class="letter-para">
+          Thank you for making this chapter of life brighter than it could have ever been. May this year surprise you with beautiful memories, endless happiness, and countless reasons to smile.
+        </p>
+      </div>
+
+      <div class="letter-sign">With appreciation, always 🌸</div>
+    </div>
+
+    <!-- Final animation scene -->
+    <div class="final-scene" data-aos="fade-up" data-aos-delay="300">
+      <span class="final-cake">🎂</span>
+      <p class="final-text">Here's to you, Togepi — on your most special day. 🌸</p>
+
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn-primary" onclick="launchConfetti()">🎉 Celebrate!</button>
+        <a href="#chapter-t" class="btn-secondary">Replay Our Story 🌸</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>Made with a lot of care, just for you 🌸 · Happy Birthday, Togepi</p>
+  <p style="font-size:0.85rem;margin-top:6px;opacity:0.7;">Every beautiful story deserves a beautiful beginning ✨</p>
+</footer>
+
+<!-- ============================================================ -->
+<!-- JAVASCRIPT                                                    -->
+<!-- ============================================================ -->
+<script>
+// ============================
+// REASONS DATA (60 reasons)
+// ============================
+const reasons = [
+  { icon: '🌸', text: 'The way you smile at the smallest things' },
+  { icon: '💬', text: 'Your honest, genuine way of talking' },
+  { icon: '🌙', text: 'Late-night conversations that felt like home' },
+  { icon: '☕', text: 'How comfortable you make every moment feel' },
+  { icon: '😂', text: 'Your laugh — entirely, completely yours' },
+  { icon: '🤗', text: 'The way you actually listen' },
+  { icon: '🌷', text: 'Your effortless kindness, never performative' },
+  { icon: '📱', text: 'Random reels sent at the perfect time' },
+  { icon: '✨', text: 'The sparkle in your most ordinary moments' },
+  { icon: '🐣', text: 'Your wonderfully childlike curiosity' },
+
+  { icon: '🌿', text: 'How you make patience look natural' },
+  { icon: '💡', text: 'The questions you ask that actually matter' },
+  { icon: '🎀', text: 'Your little habits that are entirely your own' },
+  { icon: '🏡', text: 'The comfort your presence carries' },
+  { icon: '🌟', text: 'How ordinary days become something more' },
+  { icon: '🦋', text: 'The lightness you bring into conversations' },
+  { icon: '🌺', text: 'Your ability to find beauty in simple things' },
+  { icon: '💖', text: 'A caring nature that never announces itself' },
+  { icon: '☀️', text: 'Your quietly contagious positivity' },
+  { icon: '🎈', text: 'The way celebrations feel brighter with you' },
+
+  { icon: '📸', text: 'Every picture that somehow captures something real' },
+  { icon: '🎵', text: 'The music recommendations that actually landed' },
+  { icon: '🌸', text: 'How you can be silly and sincere in the same breath' },
+  { icon: '🍵', text: 'Conversations that felt worth staying up for' },
+  { icon: '💌', text: 'Messages that showed up at exactly the right time' },
+  { icon: '🌙', text: 'Your honesty that never feels harsh' },
+  { icon: '✌️', text: 'That peace-sign picture with too much happiness in one frame' },
+  { icon: '🌈', text: 'The way your mood is quietly catching' },
+  { icon: '🤝', text: 'Support you gave without being asked for it' },
+  { icon: '🧸', text: 'Your playful side that makes everything lighter' },
+
+  { icon: '🗺️', text: 'Adventures to look forward to, because of you' },
+  { icon: '💫', text: 'The way time passes differently when we talk' },
+  { icon: '🌹', text: 'Your warmth that lingers long after a conversation ends' },
+  { icon: '😊', text: 'A smile that honestly changes the room' },
+  { icon: '📖', text: 'Stories you tell that make you want to hear more' },
+  { icon: '🔍', text: 'How genuinely interested you are in other people' },
+  { icon: '🌻', text: 'The quiet consistency of your kindness' },
+  { icon: '💙', text: 'How you make even difficult conversations feel safe' },
+  { icon: '🌠', text: 'Your dreams, which feel entirely achievable' },
+  { icon: '🎂', text: 'Today — and every birthday still to come' },
+
+  { icon: '🌧️', text: 'Being there on the messy, imperfect days too' },
+  { icon: '🧩', text: 'The way you fit into conversations effortlessly' },
+  { icon: '🌾', text: 'A groundedness that makes everything calmer' },
+  { icon: '🦚', text: 'Your quiet confidence, entirely unbothered' },
+  { icon: '🌼', text: 'The little details you notice that others miss' },
+  { icon: '🎁', text: 'Every conversation that felt like a small gift' },
+  { icon: '🕊️', text: 'The peace you bring just by being present' },
+  { icon: '📷', text: 'Photos that tell your story more beautifully than words' },
+  { icon: '🌊', text: 'The calm you carry even in uncertain moments' },
+  { icon: '💐', text: 'Simply the way you are — no explanation needed' },
+
+  { icon: '🌸', text: 'How effortlessly you make someone feel valued' },
+  { icon: '🌙', text: 'That specific kind of tiredness after a really good conversation' },
+  { icon: '🍀', text: 'Feeling genuinely lucky to know someone like you' },
+  { icon: '✨', text: 'The sparkle in every unremarkable moment youre in' },
+  { icon: '🎵', text: 'Every laugh that happened in between the serious parts' },
+  { icon: '🌷', text: 'How you never try to be impressive — and end up being it anyway' },
+  { icon: '🏡', text: 'The warmth that makes any space feel a little more like home' },
+  { icon: '⭐', text: 'The fact that you exist, in exactly the way that you do' },
+  { icon: '🌺', text: 'Everything that makes you entirely, unforgettably you' },
+  { icon: '💖', text: 'This birthday — and the person whose day it is 🌸' },
+];
+
+// Render reasons grid
+const grid = document.getElementById('reasons-grid');
+const pageNotes = [
+  "It's funny how little things quietly become the biggest reasons to smile.",
+  "Some things don't need grand gestures. They just need to be noticed.",
+  "The list ends eventually. The reasons probably never will.",
+  "Every single one of these — genuinely, completely true.",
+  "And there could have been more.",
+  "Still counting."
+];
+
+reasons.forEach((r, i) => {
+  const card = document.createElement('div');
+  card.className = 'reason-card';
+  card.setAttribute('data-aos', 'fade-up');
+  card.setAttribute('data-aos-delay', String((i % 5) * 60));
+  card.innerHTML = `
+    <div class="reason-num">${String(i+1).padStart(2,'0')}</div>
+    <span class="reason-icon">${r.icon}</span>
+    <div class="reason-text">${r.text}</div>
+    <span class="reason-heart">💖</span>
+  `;
+  card.addEventListener('click', (e) => flowerPetalBurst(e));
+  grid.appendChild(card);
+
+  // Insert page notes every 10 cards
+  if ((i + 1) % 10 === 0 && i < reasons.length - 1) {
+    const note = document.createElement('div');
+    note.className = 'reasons-page-note';
+    note.setAttribute('data-aos', 'fade-up');
+    note.style.gridColumn = '1 / -1';
+    note.innerHTML = `✨ ${pageNotes[Math.floor(i/10)]} ✨`;
+    grid.appendChild(note);
+
+    const deco = document.createElement('div');
+    deco.style.cssText = 'grid-column:1/-1;text-align:center;font-size:1.5rem;opacity:0.5;';
+    deco.textContent = '🌸 🦋 ⭐ 🌷 🌼 🌸';
+    grid.appendChild(deco);
+  }
+});
+
+// ============================
+// LOADING SCREEN
+// ============================
+window.addEventListener('load', () => {
+  // Spawn loading blossoms
+  const loading = document.getElementById('loading');
+  for (let i = 0; i < 15; i++) {
+    const b = document.createElement('span');
+    b.className = 'loading-blossom';
+    b.textContent = ['🌸','🌷','✨','💫','🌼'][Math.floor(Math.random()*5)];
+    b.style.cssText = `
+      left:${Math.random()*100}%;
+      animation-duration:${3+Math.random()*4}s;
+      animation-delay:${Math.random()*3}s;
+      font-size:${0.8+Math.random()}rem;
+    `;
+    loading.appendChild(b);
+  }
+
+  setTimeout(() => {
+    gsap.to('#loading', {
+      opacity: 0, duration: 1.2, ease: 'power2.inOut',
+      onComplete: () => {
+        loading.style.display = 'none';
+        gsap.to('#main-nav', { opacity: 1, duration: 0.6 });
+        AOS.refresh();
+        spawnFireflies();
+        spawnAmbient();
+      }
+    });
+  }, 3000);
+});
+
+// Egg click (secret — 5 clicks)
+let eggClicks = 0;
+function eggClick() {
+  eggClicks++;
+  const egg = document.getElementById('loading-egg');
+  if (eggClicks >= 5) {
+    egg.textContent = '🐣';
+    const msg = document.getElementById('secret-msg');
+    msg.style.display = 'block';
+    gsap.fromTo(msg, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.5 });
+    setTimeout(() => {
+      gsap.to(msg, { opacity: 0, duration: 0.5, onComplete: () => msg.style.display = 'none' });
+    }, 4000);
+    eggClicks = 0;
+  }
+}
+
+// ============================
+// CURSOR
+// ============================
+const cursor = document.getElementById('cursor');
+const cursorTrail = document.getElementById('cursor-trail');
+const particles = ['🌸','✨','💫','🌷','⭐'];
+let lastParticle = 0;
+
+document.addEventListener('mousemove', (e) => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  cursorTrail.style.left = e.clientX + 'px';
+  cursorTrail.style.top = e.clientY + 'px';
+
+  const now = Date.now();
+  if (now - lastParticle > 120) {
+    lastParticle = now;
+    const p = document.createElement('div');
+    p.className = 'cursor-particle';
+    p.textContent = particles[Math.floor(Math.random() * particles.length)];
+    p.style.cssText = `left:${e.clientX}px;top:${e.clientY}px;`;
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 800);
+  }
+});
+
+// ============================
+// BIRTHDAY CAKE INTERACTION
+// ============================
+let cakeClicks = 0;
+document.getElementById('birthday-cake').addEventListener('click', () => {
+  cakeClicks++;
+  const cake = document.getElementById('birthday-cake');
+  if (cakeClicks === 1) {
+    cake.textContent = '🎂';
+    launchConfetti(30);
+  }
+  gsap.fromTo(cake, { scale: 1 }, { scale: 1.3, duration: 0.15, yoyo: true, repeat: 1 });
+});
+
+// ============================
+// CONFETTI
+// ============================
+function launchConfetti(count = 80) {
+  const colors = ['#f9c6d0','#c5dff8','#d9b8f5','#fdd9b5','#f4a0b0','#e8c96e','#c8836e'];
+  for (let i = 0; i < count; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti-piece';
+    c.style.cssText = `
+      left:${Math.random()*100}vw;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      width:${5+Math.random()*8}px;
+      height:${5+Math.random()*8}px;
+      animation-duration:${2+Math.random()*3}s;
+      animation-delay:${Math.random()*0.5}s;
+      border-radius:${Math.random()>0.5?'50%':'2px'};
+    `;
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 5000);
+  }
+
+  // Bloom flowers
+  const flowerTypes = ['🌸','🌷','🌼','🌺','🌹'];
+  for (let i = 0; i < 12; i++) {
+    setTimeout(() => {
+      const b = document.createElement('div');
+      b.className = 'bloom';
+      b.textContent = flowerTypes[Math.floor(Math.random()*flowerTypes.length)];
+      b.style.cssText = `
+        left:${20+Math.random()*60}%;
+        top:${20+Math.random()*60}%;
+        font-size:${1.5+Math.random()*1.5}rem;
+      `;
+      document.querySelector('.final-scene').appendChild(b);
+      setTimeout(() => b.remove(), 2000);
+    }, i * 100);
+  }
+}
+
+// ============================
+// STAR CLICK
+// ============================
+function starClick(el) {
+  const rect = el.getBoundingClientRect();
+  const burst = document.createElement('div');
+  burst.className = 'star-burst';
+  burst.textContent = '⭐';
+  burst.style.cssText = `
+    left:${rect.left + rect.width/2}px;
+    top:${rect.top + rect.height/2}px;
+    font-size:1.5rem;
+  `;
+  document.body.appendChild(burst);
+  setTimeout(() => burst.remove(), 700);
+
+  // Sparkle mini-burst
+  for (let i = 0; i < 5; i++) {
+    const p = document.createElement('div');
+    p.className = 'cursor-particle';
+    p.textContent = '✨';
+    p.style.cssText = `
+      left:${rect.left + rect.width/2 + (Math.random()-0.5)*60}px;
+      top:${rect.top + rect.height/2 + (Math.random()-0.5)*60}px;
+      animation-duration:0.6s;
+    `;
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 700);
+  }
+}
+
+// ============================
+// FLOWER PETAL BURST ON CLICK
+// ============================
+function flowerPetalBurst(e) {
+  const petals = ['🌸','🌷','🌼','🌺'];
+  for (let i = 0; i < 6; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal-fall';
+    p.textContent = petals[Math.floor(Math.random()*petals.length)];
+    p.style.cssText = `
+      left:${e.clientX + (Math.random()-0.5)*60}px;
+      top:${e.clientY}px;
+      font-size:${0.8+Math.random()*0.8}rem;
+      animation-delay:${Math.random()*0.3}s;
+    `;
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 1800);
+  }
+}
+
+// ============================
+// FIREFLIES
+// ============================
+function spawnFireflies() {
+  const container = document.getElementById('fireflies');
+  for (let i = 0; i < 12; i++) {
+    const f = document.createElement('div');
+    f.className = 'firefly';
+    f.style.cssText = `
+      left:${Math.random()*100}vw;
+      top:${Math.random()*100}vh;
+      animation-duration:${4+Math.random()*5}s;
+      animation-delay:${Math.random()*4}s;
+      opacity:${0.4+Math.random()*0.6};
+    `;
+    container.appendChild(f);
+  }
+}
+
+// ============================
+// AMBIENT FLOATING ELEMENTS
+// ============================
+function spawnAmbient() {
+  const container = document.getElementById('ambient');
+  const els = ['🌸','🌷','🌼','✨','💫','🦋','⭐'];
+  for (let i = 0; i < 18; i++) {
+    const el = document.createElement('span');
+    el.className = 'ambient-el';
+    el.textContent = els[Math.floor(Math.random()*els.length)];
+    el.style.cssText = `
+      left:${Math.random()*100}%;
+      bottom:-10vh;
+      font-size:${0.8+Math.random()*0.8}rem;
+      animation-duration:${8+Math.random()*12}s;
+      animation-delay:${Math.random()*10}s;
+    `;
+    container.appendChild(el);
+  }
+}
+
+// ============================
+// BUTTERFLY HOVER (on trait cards)
+// ============================
+document.querySelectorAll('.trait-card, .reason-card').forEach(card => {
+  card.addEventListener('mouseenter', (e) => {
+    if (Math.random() > 0.6) {
+      const b = document.createElement('span');
+      b.className = 'butterfly-el';
+      b.textContent = '🦋';
+      b.style.cssText = `
+        left:${e.offsetX}px;
+        top:${e.offsetY}px;
+      `;
+      card.appendChild(b);
+      setTimeout(() => b.remove(), 900);
+    }
+  });
+});
+
+// ============================
+// CLOUD PARALLAX
+// ============================
+document.addEventListener('mousemove', (e) => {
+  const clouds = document.querySelectorAll('.ambient-el');
+  const x = (e.clientX / window.innerWidth - 0.5) * 10;
+  clouds.forEach((c, i) => {
+    if (i % 3 === 0) c.style.transform = `translateX(${x}px)`;
+  });
+});
+
+// ============================
+// GSAP SCROLL ANIMATIONS
+// ============================
+gsap.registerPlugin(ScrollTrigger);
+
+// Hero title cinematic entrance
+gsap.from('.hero-title', {
+  opacity: 0,
+  y: 60,
+  duration: 1.4,
+  ease: 'power3.out',
+  delay: 3.5
+});
+
+// Parallax on sections
+gsap.utils.toArray('.hero-sparkle').forEach((el, i) => {
+  gsap.to(el, {
+    y: -50 * (i % 3 + 1),
+    scrollTrigger: {
+      trigger: '#chapter-t',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: true
+    }
+  });
+});
+
+// ============================
+// AOS INIT
+// ============================
+AOS.init({
+  duration: 800,
+  easing: 'ease-out-cubic',
+  once: false,
+  offset: 80,
+  mirror: true
+});
+
+// ============================
+// TOGEPI EGG SECRET (in main site)
+// ============================
+let togepiSecret = 0;
+document.querySelectorAll('.hero-cake, .final-cake').forEach(el => {
+  el.addEventListener('click', () => {
+    togepiSecret++;
+    if (togepiSecret >= 5) {
+      const msg = document.getElementById('secret-msg');
+      msg.style.display = 'block';
+      gsap.fromTo(msg, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.5 });
+      setTimeout(() => {
+        gsap.to(msg, { opacity: 0, duration: 0.5, onComplete: () => msg.style.display = 'none' });
+      }, 4000);
+      togepiSecret = 0;
+    }
+  });
+});
+</script>
+</body>
+</html>
+Done
